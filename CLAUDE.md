@@ -10,19 +10,20 @@ JS all inline (~300 KB). No build step, no dependencies, no framework.
 
 ## Updating the app — the main task
 
-The newest version of the page is normally dropped at:
+The user supplies the newest page one of two ways (handle **both**):
+- **A)** Saved directly over the repo file: `C:\Users\stevo\projects\spades-tracker\index.html`
+  (in that case `git status` already shows `index.html` modified — skip the copy in step 1).
+- **B)** Dropped in Downloads: `C:\Users\stevo\Downloads\index.html` (the default for browser saves).
 
-```
-C:\Users\stevo\Downloads\index.html
-```
+When the user says **"update it"**, **"update spades"**, **"deploy the new version"**,
+**"drop the new index"**, **"push it live"**, or anything similar, do this:
 
-When the user says **"update it"**, **"deploy the new version"**, **"drop the new index"**,
-**"push it live"**, or anything similar, do this:
-
-1. Copy the newest file into the repo root, replacing the app:
+1. Make sure the newest file is the repo root `index.html`. If they used Downloads (B),
+   copy it in (skip this if they already saved over the repo file, case A):
    ```powershell
    Copy-Item "C:\Users\stevo\Downloads\index.html" "C:\Users\stevo\projects\spades-tracker\index.html" -Force
    ```
+   If unsure which is newer, compare `Get-Item` LastWriteTime of both and use the newer one.
 2. Commit and push — this **auto-deploys to production** via the Vercel↔GitHub integration:
    ```powershell
    cd C:\Users\stevo\projects\spades-tracker
